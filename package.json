@@ -1,0 +1,66 @@
+{
+  "name": "wechat-backup",
+  "version": "1.0.0",
+  "main": "dist/main/index.js",
+  "scripts": {
+    "dev": "concurrently \"yarn serve\" \"yarn elec\"",
+    "elec": "electron ./src/main/index.js",
+    "serve": "vite",
+    "build:vite": "vite build --emptyOutDir",
+    "pre": "vite preview --port 3344",
+    "pre:elec": "concurrently \"vite build --emptyOutDir\" \"vite preview --port 3344\" \"yarn elec\"",
+    "postinstall": "electron-builder install-app-deps && wx-voice compile",
+    "build": "vite build --emptyOutDir && electron-builder --dir",
+    "build:win": "vite build --emptyOutDir && electron-builder -w --x64 --dir"
+  },
+  "dependencies": {
+    "@electron/remote": "^2.0.1",
+    "@element-plus/icons": "^0.0.11",
+    "axios": "^1.6.5",
+    "better-sqlite3": "^9.3.0",
+    "crypto-js": "^4.1.1",
+    "dayjs": "^1.10.7",
+    "dotenv": "^10.0.0",
+    "fast-xml-parser": "^4.2.4",
+    "fs-extra": "^10.0.0",
+    "he": "^1.2.0",
+    "lzutf8": "^0.6.0",
+    "mime": "^3.0.0",
+    "mitt": "^3.0.0",
+    "sleep-promise": "^9.1.0",
+    "utf-8": "^2.0.0",
+    "wx-voice": "^0.2.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^1.6.1",
+    "@vue/compiler-sfc": "^3.2.6",
+    "concurrently": "^6.2.1",
+    "electron": "^16.0.0-beta.6",
+    "electron-builder": "^22.13.1",
+    "element-plus": "^1.1.0-beta.15",
+    "less": "^4.1.2",
+    "less-loader": "^10.2.0",
+    "prettier": "^2.4.0",
+    "unplugin-vue-components": "^0.15.0",
+    "vite": "^2.5.4",
+    "vite-plugin-element-plus": "^0.0.12",
+    "vue": "^3.2.16"
+  },
+  "build": {
+    "asar": false,
+    "files": [
+      "dist/**"
+    ],
+    "directories": {
+      "output": "release"
+    },
+    "mac": {
+      "identity": null
+    }
+  },
+  "prettier": {
+    "vueIndentScriptAndStyle": true,
+    "arrowParens": "avoid",
+    "semi": false
+  }
+}
